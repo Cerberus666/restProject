@@ -18,7 +18,7 @@ public class RationFamilyData {
 	int familyAge = 0;
 	@OneToOne
 	@JoinColumn(name = "ration_id")
-	int rationId = 0;
+	RationMasterData rationId = null;
 	@Column(name = "family_name")
 	String familyName = null;
 	@Column(name = "family_gender")
@@ -40,11 +40,11 @@ public class RationFamilyData {
 		this.familyAge = familyAge;
 	}
 
-	public int getRationId() {
+	public RationMasterData getRationId() {
 		return rationId;
 	}
 
-	public void setRationId(int rationId) {
+	public void setRationId(RationMasterData rationId) {
 		this.rationId = rationId;
 	}
 

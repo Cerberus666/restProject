@@ -23,8 +23,8 @@ public class RationDao extends Dao{
 	}
 
 	public ArrayList<RationFamilyData> getFamilyDataByrationId(int rationCardId) {
-		Query query = session.createQuery("from family_data_mapping where rationId=:rationid")
-				.setParameter("rationid", rationCardId);
+		Query query = session.createQuery("from RationFamilyData where rationId.rationCardId=:rationid")
+				.setInteger("rationid", rationCardId);
 		return (ArrayList<RationFamilyData>)query.list();
 	}
 	

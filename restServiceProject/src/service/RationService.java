@@ -2,8 +2,11 @@ package service;
 
 import java.util.ArrayList;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,12 +15,34 @@ import bean.RationFamilyData;
 import bean.RationMasterData;
 import dao.RationDao;
 
-@Path("/ration")
+@Path("/RationService")
 public class RationService {
 	
+	@GET
+	@Path("/{param}")
+	public Response invalidRequestGET(@PathParam("param") String uri){
+		return Response.status(200)
+				.entity("invalid request " + uri)
+				.build();
+	}
+	
 	@POST
+	@Path("/{param}")
+	public Response invalidRequestPOST(@PathParam("param") String uri){
+		return Response.status(200)
+				.entity("invalid request " + uri)
+				.build();
+	}
+	
+	@GET
 	@Path("/fullRationData")
-	public JSONArray getFullRationData(){
+	public Response getFullRationData1(){
+		return Response.status(200).entity("inside rest service").build();
+	}
+	
+	@GET
+	@Path("/fullRationData1")
+	public Response getFullRationData(){
 		JSONArray rationArray = new JSONArray();
 		RationDao rationDao = new RationDao();
 		ArrayList<RationMasterData> rationMasterList = rationDao.getRationMasterData();
@@ -43,7 +68,7 @@ public class RationService {
 			rationArray.add(jsonObj);
 		}
 		System.out.println("ration Data : - \n" + rationArray.toString());
-		return rationArray;
+		return Response.status(200).entity(rationArray).build();
 	}
 
 }
